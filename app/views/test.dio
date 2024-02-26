@@ -43,7 +43,7 @@
                 <mxCell id="15" value="user&#10;item" style="text;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" vertex="1" parent="14">
                     <mxGeometry y="26" width="270" height="124" as="geometry"/>
                 </mxCell>
-                <mxCell id="23" style="edgeStyle=none;html=1;endArrow=ERmany;endFill=0;exitX=1;exitY=0.262;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="7">
+                <mxCell id="23" style="edgeStyle=none;html=1;endArrow=none;endFill=0;exitX=1;exitY=0.262;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="7">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="410" y="460" as="targetPoint"/>
                         <mxPoint x="310" y="458" as="sourcePoint"/>
