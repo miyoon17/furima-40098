@@ -1,3 +1,4 @@
+=begin
 class Cost < ActiveHash::Base
   self.data = [
     { id: 1, name: '---' },
@@ -8,3 +9,4 @@ class Cost < ActiveHash::Base
   include ActiveHash::Associations
   has_many :items
 end
+=end

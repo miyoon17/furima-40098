@@ -1,3 +1,5 @@
+=begin
+
 class Category < ActiveHash::Base
   self.data = [
     { id: 1, name: '---' },
@@ -16,3 +18,5 @@ class Category < ActiveHash::Base
   include ActiveHash::Associations
   has_many :items
 end
+
+=end
