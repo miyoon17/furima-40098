@@ -10,11 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_24_031442) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_26_041808) do
+  create_table "categories", charset: "utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "text", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "conditions", charset: "utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "text", null: false
+    t.integer "condition_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "costs", charset: "utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "text", null: false
+    t.integer "cost_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "furimas", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "text"
     t.text "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "prefectures", charset: "utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "text", null: false
+    t.integer "prefecture_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
