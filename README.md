@@ -37,8 +37,7 @@ Things you may want to cover:
 |birtheday         |date    |null:false   |
 
 has_many :items
-has_many :buyers
-belongs_to :order
+has_many :order
 
 
 # items
@@ -57,7 +56,7 @@ belongs_to :order
 
 belongs_to :user
 
-has_one :pictures
+has_one :order
 
 
 # buyers
@@ -66,10 +65,10 @@ has_one :pictures
 |----------------|---------|-------------|
 |postcode        |string   |null:false   |
 |prefecture_id   |string   |null:false   |
-|city            |string   |null:false   |
-|address         |string   |null:false   |
-|buildingname    |string   |             |
-|phonenumber     |string   |null:false   |
+|city            |string   |null:false,foreign_key: true|
+|address         |string   |null:false,foreign_key: true|
+|buildingname    |string   |null:false,foreign_key: true|
+|phonenumber     |string   |null:false,foreign_key: true|
 
 
 belongs_to :order
@@ -82,6 +81,6 @@ belongs_to :order
 |user            |references|null:false,foreign_key: true|
 |item            |references|null:false,foreign_key: true|
 
-has_many :users
-has_many :buyers
+has_one :users
+has_one :buyers
 belongs_to :item
