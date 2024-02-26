@@ -37,31 +37,25 @@ Things you may want to cover:
 |birtheday         |date    |null:false   |
 
 has_many :items
-has_one  :buyers
+has_many :buyers
+belongs_to :order
 
 
 # items
 
-|      Column       |  Type   |   Options   |
-|-------------------|-------- |-------------|
-|image              |string   |null:false   |    
-|name               |string   |null:false   |
-|price              |integer  |null:false   |
-|decision           |string   |             |
-|description        |text     |null:false   |
-|category_id        |string   |null:false   |
-|condition_id       |string   |null:false   |
-|cost_id            |string   |null:false   |
-|scheduled_day_id   |string   |null:false   |
-|prefecture_id      |string   |null:false   |
+|      Column       |  Type    |   Options   |
+|-------------------|----------|-------------|
+|name               |string    |null:false   |
+|price              |integer   |null:false   |
+|description        |text      |null:false   |
+|category_id        |integer   |null:false   |
+|condition_id       |integer   |null:false   |
+|cost_id            |integer   |null:false   |
+|scheduled_day_id   |integer   |null:false   |
+|prefecture_id      |integer   |null:false   |
 |user               |references|null:false,foreign_key: true|
 
 belongs_to :user
-belongs_to :category
-belongs_to :condition
-belongs_to :cost
-belongs_to :prefecture
-belongs_to :scheduled_day
 
 has_one :pictures
 
@@ -71,23 +65,23 @@ has_one :pictures
 |     Column     |  Type   |   Options   |
 |----------------|---------|-------------|
 |postcode        |string   |null:false   |
-|prefecture      |string   |null:false   |
+|prefecture_id   |string   |null:false   |
 |city            |string   |null:false   |
 |address         |string   |null:false   |
 |buildingname    |string   |             |
 |phonenumber     |string   |null:false   |
-|user            |references|null:false,foreign_key: true|
-
-belongs_to :user
 
 
-# pictures
+belongs_to :order
+
+
+# orders
 
 |     Column     |  Type    |   Options   |
 |----------------|----------|-------------|
-|picture         |string    |null:false   |
-|user_id         |references|null:false,foreign_key: true|
-|item_id         |references|null:false,foreign_key: true|
+|user            |references|null:false,foreign_key: true|
+|item            |references|null:false,foreign_key: true|
 
-
+has_many :users
+has_many :buyers
 belongs_to :item
