@@ -37,7 +37,6 @@ Things you may want to cover:
 |birtheday         |date    |null:false   |
 
 has_many :items
-has_many :comments
 has_one  :buyers
 
 
@@ -45,19 +44,26 @@ has_one  :buyers
 
 |      Column       |  Type   |   Options   |
 |-------------------|-------- |-------------|
+|image              |string   |null:false   |    
 |name               |string   |null:false   |
 |price              |integer  |null:false   |
+|decision           |string   |             |
 |description        |text     |null:false   |
-|comment            |text     |             |
+|category_id        |string   |null:false   |
 |condition_id       |string   |null:false   |
 |cost_id            |string   |null:false   |
-|day_id             |string   |null:false   |
-|purchase_history_id|string   |null:false   |
-|user               |reference|null:false,foreign_key: true|
+|scheduled_day_id   |string   |null:false   |
+|prefecture_id      |string   |null:false   |
+|user               |references|null:false,foreign_key: true|
 
 belongs_to :user
-belongs_to :purchase_history
-has_many :pictures
+belongs_to :category
+belongs_to :condition
+belongs_to :cost
+belongs_to :prefecture
+belongs_to :scheduled_day
+
+has_one :pictures
 
 
 # buyers
@@ -67,28 +73,21 @@ has_many :pictures
 |postcode        |string   |null:false   |
 |prefecture      |string   |null:false   |
 |city            |string   |null:false   |
+|address         |string   |null:false   |
 |buildingname    |string   |             |
 |phonenumber     |string   |null:false   |
-|user            |reference|null:false,foreign_key: true|
+|user            |references|null:false,foreign_key: true|
 
 belongs_to :user
 
 
 # pictures
 
-|     Column     |  Type   |   Options   |
-|----------------|---------|-------------|
-|picture         |string   |null:false   |
-|item            |reference|null:false,foreign_key: true|
+|     Column     |  Type    |   Options   |
+|----------------|----------|-------------|
+|picture         |string    |null:false   |
+|user_id         |references|null:false,foreign_key: true|
+|item_id         |references|null:false,foreign_key: true|
+
 
 belongs_to :item
-
-
-# purchase_history
-
-|     Column     |  Type   |   Options   |
-|----------------|---------|-------------|
-|name            |string   |null:false   |
-|history         |string   |             |
-
-has_many :items
