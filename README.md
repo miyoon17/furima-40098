@@ -30,14 +30,14 @@ Things you may want to cover:
 |nickname          |string  |null:false   |
 |email             |string  |null:false, unique: true    |
 |encrypted_password|string  |null:false   |
-|lastname          |string  |null:false   |
-|firstname         |string  |null:false   |
-|lastname_kana     |string  |null:false   |
-|firstname_kana    |string  |null:false   |
-|birtheday         |date    |null:false   |
+|last_name          |string  |null:false   |
+|first_name         |string  |null:false   |
+|last_name_kana     |string  |null:false   |
+|first_name_kana    |string  |null:false   |
+|birthday         |date    |null:false   |
 
 has_many :items
-has_many :order
+has_many :orders
 
 
 # items
@@ -63,12 +63,12 @@ has_one :order
 
 |     Column     |  Type   |   Options   |
 |----------------|---------|-------------|
-|postcode        |string   |null:false   |
+|post_code       |string   |null:false   |
 |prefecture_id   |string   |null:false   |
 |city            |string   |null:false,foreign_key: true|
 |address         |string   |null:false,foreign_key: true|
-|buildingname    |string   |null:false,foreign_key: true|
-|phonenumber     |string   |null:false,foreign_key: true|
+|building_name   |string   |null:false,foreign_key: true|
+|phone_number    |string   |null:false,foreign_key: true|
 
 
 belongs_to :order
@@ -81,6 +81,6 @@ belongs_to :order
 |user            |references|null:false,foreign_key: true|
 |item            |references|null:false,foreign_key: true|
 
-has_one :users
-has_one :buyers
+belongs_to :users
+has_one :buyer
 belongs_to :item
