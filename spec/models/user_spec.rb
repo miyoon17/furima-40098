@@ -76,34 +76,46 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors[:password]).to include("は英字と数字の両方を含めて設定してください")
       end
-      it 'last_nameとfirst_nameがそれぞれ必須であること' do
+      it 'last_nameが必須であること' do
         @user.last_name = nil
-        @user.first_name = nil
         @user.valid?
         expect(@user.errors[:last_name]).to include("can't be blank", "全角文字を使用してください")
-        expect(@user.errors[:first_name]).to include("can't be blank", "全角文字を使用してください")
+        it 'first_nameが必須であること' do
+          @user.first_name = nil
+          @user.valid?
+          expect(@user.errors[:first_name]).to include("can't be blank", "全角文字を使用してください")
       end
-      it 'last_nameとfirst_nameが全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
+      it 'last_nameが全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
         @user.last_name = 'tarou'
-        @user.first_name = 'yamada'
         @user.valid?
         expect(@user.errors[:last_name]).to include("全角文字を使用してください")
+      end
+      it 'first_nameが全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
+        @user.first_name = 'yamada'
+        @user.valid?
         expect(@user.errors[:first_name]).to include("全角文字を使用してください")
       end
-      it 'last_name_kanaとfirst_name_kanaがそれぞれ必須であること' do
+
+      it 'last_name_kanaがそれぞれ必須であること' do
         @user.last_name_kana = nil
-        @user.first_name_kana = nil
         @user.valid?
         expect(@user.errors[:last_name_kana]).to include("can't be blank", "全角カタカナを使用してください")
+      end
+      it 'first_name_kanaがそれぞれ必須であること' do
+        @user.first_name_kana = nil
+        @user.valid?
         expect(@user.errors[:first_name_kana]).to include("can't be blank", "全角カタカナを使用してください")
       end
-      it 'last_name_kanaとfirst_name_kanaが全角（カタカナ）での入力が必須であること' do
+
+      it 'last_name_kanaが全角（カタカナ）での入力が必須であること' do
         @user.last_name_kana = 'たろう'
-        @user.first_name_kana = 'やまだ'
         @user.valid?
         expect(@user.errors[:last_name_kana]).to include("全角カタカナを使用してください")
-        expect(@user.errors[:first_name_kana]).to include("全角カタカナを使用してください")
       end
+      it 'first_name_kanaが全角（カタカナ）での入力が必須であること' do
+        @user.first_name_kana = 'やまだ'
+        @user.valid?
+        expect(@user.errors[:first_name_kana]).to include("全角カタカナを使用してください")
     end
   end
 end
