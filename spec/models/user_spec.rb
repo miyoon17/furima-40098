@@ -59,43 +59,50 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
       end
       it 'passwordが英字のみでは登録できない' do
-        user = build(:user, password: 'abcdef', password_confirmation: 'abcdef')
-        user.valid?
-        expect(user.errors[:password]).to include("は不正な値です")
+        @user.password = 'abcdef'
+        @user.password_confirmation = 'abcdef'
+        @user.valid?
+        expect(@user.errors[:password]).to include("は英字と数字の両方を含めて設定してください")
       end
       it 'passwordが数字のみでは登録できない' do
-        user = build(:user, password: '123456', password_confirmation: '123456')
-        user.valid?
-        expect(user.errors[:password]).to include("は不正な値です")
+        @user.password = '123456'
+        @user.password_confirmation = '123456'
+        @user.valid?
+        expect(@user.errors[:password]).to include("は英字と数字の両方を含めて設定してください")
       end
       it 'passwordが全角文字を含むと登録できない' do
-        user = build(:user, password: '12345あ', password_confirmation: '12345あ')
-        user.valid?
-        expect(user.errors[:password]).to include("は不正な値です")
+        @user.password = '12345あ'
+        @user.password_confirmation = '12345あ'
+        @user.valid?
+        expect(@user.errors[:password]).to include("は英字と数字の両方を含めて設定してください")
       end
       it 'last_nameとfirst_nameがそれぞれ必須であること' do
-        user = build(:user, last_name: nil, first_name: nil)
-        user.valid?
-        expect(user.errors[:last_name]).to include("を入力してください")
-        expect(user.errors[:first_name]).to include("を入力してください")
+        @user.last_name = nil
+        @user.first_name = nil
+        @user.valid?
+        expect(@user.errors[:last_name]).to include("can't be blank", "全角文字を使用してください")
+        expect(@user.errors[:first_name]).to include("can't be blank", "全角文字を使用してください")
       end
       it 'last_nameとfirst_nameが全角（漢字・ひらがな・カタカナ）での入力が必須であること' do
-        user = build(:user, last_name: 'yamada', first_name: 'tarou')
-        user.valid?
-        expect(user.errors[:last_name]).to include("は不正な値です")
-        expect(user.errors[:first_name]).to include("は不正な値です")
+        @user.last_name = 'tarou'
+        @user.first_name = 'yamada'
+        @user.valid?
+        expect(@user.errors[:last_name]).to include("全角文字を使用してください")
+        expect(@user.errors[:first_name]).to include("全角文字を使用してください")
       end
       it 'last_name_kanaとfirst_name_kanaがそれぞれ必須であること' do
-        user = build(:user, last_name_kana: nil, first_name_kana: nil)
-        user.valid?
-        expect(user.errors[:last_name_kana]).to include("を入力してください")
-        expect(user.errors[:first_name_kana]).to include("を入力してください")
+        @user.last_name_kana = nil
+        @user.first_name_kana = nil
+        @user.valid?
+        expect(@user.errors[:last_name_kana]).to include("can't be blank", "全角カタカナを使用してください")
+        expect(@user.errors[:first_name_kana]).to include("can't be blank", "全角カタカナを使用してください")
       end
       it 'last_name_kanaとfirst_name_kanaが全角（カタカナ）での入力が必須であること' do
-        user = build(:user, last_name_kana: 'やまだ', first_name_kana: 'たろう')
-        user.valid?
-        expect(user.errors[:last_name_kana]).to include("は不正な値です")
-        expect(user.errors[:first_name_kana]).to include("は不正な値です")
+        @user.last_name_kana = 'たろう'
+        @user.first_name_kana = 'やまだ'
+        @user.valid?
+        expect(@user.errors[:last_name_kana]).to include("全角カタカナを使用してください")
+        expect(@user.errors[:first_name_kana]).to include("全角カタカナを使用してください")
       end
     end
   end
