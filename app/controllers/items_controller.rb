@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
 
   # ログアウト状態のユーザーが商品出品ページへ遷移しようとすると、ログインページへリダイレクトする
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_item, only: [:show, :edit, :update]
 
   def index
     @items = Item.order("created_at DESC")
@@ -16,16 +17,33 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
   def show
-    @item = Item.find(params[:id])
+  end
+
+  def edit
+    unless current_user.id == @item.user_id
+      redirect_to action: :index
+    end
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to root_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
   def item_params
     params.require(:item).permit(:name, :description, :image, :category_id, :condition_id, :cost_id, :prefecture_id, :scheduled_day_id, :price)
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 end
