@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to root_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -25,8 +25,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless current_user.id == @item.user_id
-      redirect_to action: :index
+    if @item.user_id == current_user.id && @item.order.nil?
+    else
+      redirect_to root_path
     end
   end
 
@@ -35,8 +36,8 @@ class ItemsController < ApplicationController
       redirect_to item_path(params[:id])
     else
       render :edit, status: :unprocessable_entity
+    end
   end
-end
 
   def destroy
     if @item.user_id == current_user.id
@@ -46,6 +47,7 @@ end
   end
 
   private
+
   def item_params
     params.require(:item).permit(:name, :description, :image, :category_id, :condition_id, :cost_id, :prefecture_id, :scheduled_day_id, :price)
   end
